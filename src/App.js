@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import searchIcon from './attributes/magnifying-glass.png';
+import Loader from './components/Loader';
+import Modal from './components/Modal';
 
 const publicUrl = process.env.REACT_APP_UNSPLASH_HOME_URL;
 const key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
@@ -11,6 +13,13 @@ const App = () => {
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(false);
   const [keyword, setKeyword] = useState('');
+  const [show, setShow] = useState(false)
+
+  const openModal = (e) => {
+    e.preventDefault()
+    console.log("working", "dfdfdd")
+    //setOpen(true)
+  }
 
   const search = async (e) => {
     e.preventDefault()
@@ -33,9 +42,9 @@ const App = () => {
 
    
    try {
-      const { data } = await axios.get(`${publicUrl}/photos/?client_id=${key}&per_page=8`);
+      const { data } = await axios.get(`${publicUrl}/search/photos/?client_id=${key}&query=african&per_page=7`);
 
-     setImages(data)
+     setImages(data.results)
      setLoading(false)
       console.log(data, 'images');
    } catch (error) {
@@ -50,24 +59,37 @@ const App = () => {
 
   }, [])
 
+ 
+
   return (
     <>
-      {loading && <p>loading .... </p>}
       <div className='App'>
         <header className='App-header'>
           <form className='input'>
             <button className='input_submit' onClick={(e) => search(e)} type='submit'>
-              <img src={searchIcon} />
+              <img src={searchIcon} alt='search icon' />
             </button>
-            <input onChange={(e) => setKeyword(e.target.value)} type='input' placeholder='Enter a task' className='input__box' />
+            <input onChange={(e) => setKeyword(e.target.value)} type='input' placeholder='Search for photo' className='input__box' />
           </form>
         </header>
+        {/* <div className='therr'>
+          c scbms csc
+          <Modal />
+        </div> */}
+
         <section className=''>
           <div className='grid-container'>
+            {loading && <Loader />}
             {images.map((image) => (
-              <p key={image.id} className='grid-item'>
-                <img src={image.urls.thumb} />
-              </p>
+              <div className='grid-item' onClick={(e) => openModal(e)}>
+                <div key={image.id}>
+                  <img src={image.urls.thumb} className='image-container' alt='unsplash images' />
+                </div>
+                <div className='user-details'>
+                  <span class='name-span'>{image.user.name}</span>
+                  <span class='name-span'>{image.user.location}</span>
+                </div>
+              </div>
             ))}
           </div>
         </section>
