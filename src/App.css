@@ -1,5 +1,5 @@
 .App{
-  padding: 30px 20px 0px 20px;
+  padding: 20px 20px 0px 20px;
   width: 100vw;
   height: 100vh;
   max-width: 1200px;
@@ -12,7 +12,7 @@
 
 .App-header{
   width: 90%;
-  height: 30%;
+  height: 30% !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,6 +72,19 @@
   grid-gap: 2rem;
   width: 100%;
   }
+.result-header{
+  margin-right: 2rem;
+}
+
+.searchAgain {
+  padding: 10px;
+  border: none;
+  background-color: antiquewhite;
+  border-radius: 7px;
+  font-weight: 500;
+  cursor: pointer;
+
+}
 
   .empty-result{
     margin-top: 5rem;
@@ -125,6 +138,9 @@
   font-weight: 400;
 }
 
+.loader{
+  margin-top:  -1.5rem;;
+}
 
 .loader-container{
   background-color: rgb(234, 239, 243);
@@ -168,6 +184,31 @@
   grid-gap: 2rem;
   width: 100%;
 }
+
+.input_submit{
+  cursor: pointer;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  margin: 9px;
+  border-radius: 50px;
+  left: 0;
+  border: none;
+  font-size: 15px;
+  transition: 0.2s all;
+  background-color: white;
+}
+
+ .input__box{
+  width: 100%;
+  border-radius: 7px;
+  padding: 1.5rem 4rem;
+  font-size: 25px;
+  border: none;
+  transition: 0.2s;
+  font-size: 15px;
+}
+
 }
 @media only screen and (max-width: 425px){
 	 .grid-container {
@@ -177,5 +218,30 @@
   grid-template-rows: auto;
   grid-gap: 2rem;
   width: 100%;
+}
+
+  .input_submit{
+    cursor: pointer;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-radius: 50px;
+    left: 0;
+    border: none;
+    font-size: 15px;
+    transition: 0.2s all;
+    background-color: white;
+  }
+
+
+  .input__box{
+  width: 100%;
+  border-radius: 7px;
+  padding: 1.5rem 3.5rem;
+  font-size: 25px;
+  border: none;
+  transition: 0.2s;
+  font-size: 15px;
 }
 }

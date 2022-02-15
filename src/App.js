@@ -14,6 +14,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [keyword, setKeyword] = useState('');
   const [message, setMessage] = useState('');
+  const [resultHeader, setResultHeader] = useState('');
   const [error, setError] = useState(false);
   const [show, setShow] = useState(false)
 
@@ -37,6 +38,7 @@ const App = () => {
         } else {
             console.log(data, 'searching');
             setImages(data.results);
+            setResultHeader(`Search results for "${keyword}"`);
             setLoading(false);
         }
         
@@ -61,6 +63,11 @@ const App = () => {
 
   }
 
+
+  const searchAgain = () => {
+    window.location.reload(false);
+  }
+
   useEffect(() => {
     setLoading(true)
     getImages()
@@ -73,12 +80,18 @@ const App = () => {
     <>
       <div className='App'>
         <header className='App-header'>
-          <form className='input'>
-            <button className='input_submit' onClick={(e) => search(e)} type='submit'>
-              <img src={searchIcon} alt='search icon' />
-            </button>
-            <input onChange={(e) => setKeyword(e.target.value)} type='input' placeholder='Search for photo' className='input__box' />
-          </form>
+          {resultHeader ? (
+            <>
+              <h2 className='result-header'>{resultHeader}</h2> <button className='searchAgain' onClick={(e) => searchAgain(e)}>search again</button>{' '}
+            </>
+          ) : (
+            <form className='input'>
+              <button className='input_submit' onClick={(e) => search(e)} type='submit'>
+                <img src={searchIcon} alt='search icon' />
+              </button>
+              <input onChange={(e) => setKeyword(e.target.value)} type='input' placeholder='Search for photo' className='input__box' />
+            </form>
+          )}
         </header>
 
         <section className=''>
@@ -87,8 +100,8 @@ const App = () => {
               <Loader />
             ) : error ? (
               <h2 className='empty-result'>An errror occured please try to search or reload page again</h2>
-            )   : message ? (
-                  <h2 className='empty-result'>{ message }</h2>
+            ) : message ? (
+              <h2 className='empty-result'>{message}</h2>
             ) : (
               <>
                 {images.map((image) => (
