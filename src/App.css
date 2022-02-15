@@ -115,6 +115,13 @@
   filter: brightness(70%);
 }
 
+.image-container:hover{
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  filter: brightness(100%);
+}
+
 .user-details{
   position: absolute;
   font-size: 10px;
@@ -132,6 +139,8 @@
   font-weight: 500;
   font-size: 13px;
 }
+
+
 
 .location-span{
   color: white;
