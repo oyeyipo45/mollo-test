@@ -13,44 +13,50 @@ const App = () => {
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(false);
   const [keyword, setKeyword] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
   const [show, setShow] = useState(false)
 
   const openModal = (e) => {
     e.preventDefault()
-    console.log("working", "dfdfdd")
-    //setOpen(true)
   }
 
   const search = async (e) => {
-    e.preventDefault()
-    console.log(keyword, "searchng")
-  //   setLoading(true);
+    e.preventDefault();
+    setLoading(true);
     if (keyword === '') {
-      alert('Please enter something to search')
+      setMessage('please enter a keyword in the search box to search with')
+      setLoading(false);
+    } else {
+      try {
+        const { data } = await axios.get(`${publicUrl}/search/photos/?client_id=${key}&query=${keyword}&per_page=8`);
+
+        if (data.results.length === 0) {
+          setMessage('No result found for entered search');
+          setLoading(false);
+        } else {
+            console.log(data, 'searching');
+            setImages(data.results);
+            setLoading(false);
+        }
+        
+      } catch (error) {
+        setError(error)
+        setLoading(false);
+        
+      }
     }
-   try {
-     const { data } = await axios.get(`${publicUrl}/search/photos/?client_id=${key}&query=${keyword}&per_page=7`);
-     
-     console.log(data, 'searching');
-     setImages(data.results);
-     setLoading(false)
-      
-   } catch (error) {
-     console.log(error)
-   }
   }
 
   const getImages = async () => {
-
-   
    try {
-      const { data } = await axios.get(`${publicUrl}/search/photos/?client_id=${key}&query=african&per_page=7`);
+      const { data } = await axios.get(`${publicUrl}/search/photos/?client_id=${key}&query=african&per_page=8`);
 
      setImages(data.results)
      setLoading(false)
-      console.log(data, 'images');
    } catch (error) {
-     console.log(error)
+     setError(error);
+     setLoading(false);
    }
 
   }
@@ -77,18 +83,27 @@ const App = () => {
 
         <section className=''>
           <div className='grid-container'>
-            {loading && <Loader />}
-            {images.map((image) => (
-              <div className='grid-item'>
-                  <div key={image.id}>
-                    <img src={image.urls.thumb} className='image-container' alt='unsplash images' />
+            {loading ? (
+              <Loader />
+            ) : error ? (
+              <h2 className='empty-result'>An errror occured please try to search or reload page again</h2>
+            )   : message ? (
+                  <h2 className='empty-result'>{ message }</h2>
+            ) : (
+              <>
+                {images.map((image) => (
+                  <div className='grid-item'>
+                    <div key={image.id}>
+                      <img src={image.urls.thumb} className='image-container' alt='unsplash images' />
+                    </div>
+                    <div className='user-details'>
+                      <span class='name-span'>{image.user.name}</span>
+                      <span class='location-span'>{image.user.location}</span>
+                    </div>
                   </div>
-                  <div className='user-details'>
-                    <span class='name-span'>{image.user.name}</span>
-                    <span class='location-span'>{image.user.location}</span>
-                  </div>
-              </div>
-            ))}
+                ))}
+              </>
+            )}
           </div>
         </section>
       </div>
