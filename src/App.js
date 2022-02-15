@@ -25,7 +25,9 @@ const App = () => {
     e.preventDefault()
     console.log(keyword, "searchng")
   //   setLoading(true);
-
+    if (keyword === '') {
+      alert('Please enter something to search')
+    }
    try {
      const { data } = await axios.get(`${publicUrl}/search/photos/?client_id=${key}&query=${keyword}&per_page=7`);
      
@@ -72,23 +74,19 @@ const App = () => {
             <input onChange={(e) => setKeyword(e.target.value)} type='input' placeholder='Search for photo' className='input__box' />
           </form>
         </header>
-        {/* <div className='therr'>
-          c scbms csc
-          <Modal />
-        </div> */}
 
         <section className=''>
           <div className='grid-container'>
             {loading && <Loader />}
             {images.map((image) => (
-              <div className='grid-item' onClick={(e) => openModal(e)}>
-                <div key={image.id}>
-                  <img src={image.urls.thumb} className='image-container' alt='unsplash images' />
-                </div>
-                <div className='user-details'>
-                  <span class='name-span'>{image.user.name}</span>
-                  <span class='name-span'>{image.user.location}</span>
-                </div>
+              <div className='grid-item'>
+                  <div key={image.id}>
+                    <img src={image.urls.thumb} className='image-container' alt='unsplash images' />
+                  </div>
+                  <div className='user-details'>
+                    <span class='name-span'>{image.user.name}</span>
+                    <span class='location-span'>{image.user.location}</span>
+                  </div>
               </div>
             ))}
           </div>
