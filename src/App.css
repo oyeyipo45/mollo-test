@@ -298,6 +298,16 @@
   font-size: 15px;
 }
 
+ .loader-bottom{
+   display: none;
+ }
+
+ .loader-top{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+ }
+
 }
 @media only screen and (max-width: 425px){
 	 .grid-container {
@@ -333,6 +343,17 @@
   transition: 0.2s;
   font-size: 15px;
 }
+
+.loader-bottom{
+   display: none;
+ }
+
+ .loader-top{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+ }
+
 }
 
 
