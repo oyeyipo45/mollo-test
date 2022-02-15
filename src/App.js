@@ -94,7 +94,7 @@ const App = () => {
           )}
         </header>
 
-        <section className=''>
+        <section className='section-images'>
           <div className='grid-container'>
             {loading ? (
               <Loader />

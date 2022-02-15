@@ -3,21 +3,23 @@
   width: 100vw;
   height: 100vh;
   max-width: 1200px;
-  max-height: 1200px;
+  max-height: 1700px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto ;
+  margin: 0 auto;
 }
 
 .App-header{
+
+  height: 15% !important;
   width: 90%;
-  height: 30% !important;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
   background-color: rgb(246, 248, 250);
+  margin-bottom: -1.5rem;
 }
 
 
@@ -65,12 +67,12 @@
 }
 
 .grid-container {
-  margin-top: -1.5rem;
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
   grid-gap: 2rem;
   width: 100%;
+  height: 100%;
   }
 .result-header{
   margin-right: 2rem;
@@ -208,28 +210,68 @@
   border-bottom: 1px solid #eee;
 }
 
-
-
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1450px){
   
   .grid-container {
-  margin-top: -1.5rem;
+  /* margin-top: -1.5rem; */
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
   grid-gap: 2rem;
   width: 100%;
   }
+
+
+.App-header{
+
+  height: 30% !important;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px 50px 20px;
+  background-color: rgb(246, 248, 250);
+  margin-bottom: -1.5rem;
+}
+
+}
+
+
+@media only screen and (max-width: 1200px){
+  
+  .grid-container {
+  /* margin-top: -1.5rem; */
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-gap: 2rem;
+  width: 100%;
+  }
+
+
+.App-header{
+
+  height: 30% !important;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px 50px 20px;
+  background-color: rgb(246, 248, 250);
+  margin-bottom: -1.5rem;
+}
+
 }
 @media only screen and (max-width: 600px){
 	
   .grid-container {
-  margin-top: -1.5rem;
+  /* margin-top: -1.5rem; */
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
   grid-gap: 2rem;
   width: 100%;
+  height: 100%;
 }
 
 .input_submit{
@@ -259,7 +301,7 @@
 }
 @media only screen and (max-width: 425px){
 	 .grid-container {
-  margin-top: -1.5rem;
+  /* margin-top: -1.5rem; */
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
